@@ -1,10 +1,44 @@
 package pac1;
 
 public class Person {
+	public enum Gender {
+		M('M'),
+		F('F');
+
+		private char gender;
+
+		Gender(char g) {
+			this.gender = g;
+		}
+
+		public char getValue() {
+			return gender;
+		}
+
+		public static Gender fromChar(char c) {
+			if (Character.toUpperCase(c) == 'M') return M;
+			else if (Character.toUpperCase(c) == 'M') return F;
+			else throw new IllegalArgumentException("Invalid gender.");
+		}
+	}
+
 	String firstname;
 	String lastname;
-	char gender;
-	
+	Gender gender;
+	int age;
+	String weight;
+	String phoneNumber;
+
+	Person(String fname,String lname,char g, int a, String w, String pn)
+	{
+		firstname=fname;
+		lastname=lname;
+		gender = Gender.fromChar(g);
+		age = a;
+		weight = w;
+		phoneNumber = pn;
+	}
+
 	public String getFirstname() {
 		return firstname;
 	}
@@ -21,30 +55,22 @@ public class Person {
 		this.lastname = lastname;
 	}
 
-	public char getGender() {
+	public Gender getGender() {
 		return gender;
 	}
 
 	public void setGender(char gender) {
-		this.gender = gender;
+		this.gender = Gender.fromChar(gender);
 	}
 
-	Person(String fname,String lname,char g)
-	{
-		this.firstname=fname;
-		this.lastname=lname;
-		this.gender=g;	
-	}
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-	Person obj=new Person("Saritha","Ramadurai",'F');
-	System.out.println("Person Details");
-	System.out.println("__________________");
-	System.out.println("First Name:"+obj.firstname);
-	System.out.println("Last Name:"+obj.lastname);
-	
-	System.out.println("Last Name:"+obj.gender);
+	public void showDetails() {
+		System.out.println("Person Details");
+        System.out.println("__________________");
+        System.out.println("First Name: " + firstname);
+        System.out.println("Last Name: " + lastname);
+        System.out.println("Gender: " + gender);
+        System.out.println("Age: "+ age);
+        System.out.println("Weight: " + weight);
+        System.out.println("Phone number: " + phoneNumber);
 	}
 }
